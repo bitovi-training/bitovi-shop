@@ -1,0 +1,47 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-surface);
+  cursor: pointer;
+  background-color: var(--button-bg);
+  opacity: 1;
+  transition: opacity 140ms ease;
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.75;
+}
+
+.button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.button--default {
+  --button-bg: var(--color-text);
+}
+
+.button--primary {
+  --button-bg: var(--color-primary);
+}
+
+.button--accent {
+  --button-bg: var(--color-accent);
+}
+
+.button--success {
+  --button-bg: var(--color-success);
+}
+
+.button--error {
+  --button-bg: var(--color-error);
+}

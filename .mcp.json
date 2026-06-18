@@ -1,0 +1,9 @@
+{
+	"mcpServers": {
+		"shop": {
+			"type": "stdio",
+			"command": "npm",
+			"args": ["run", "--silent", "mcp:shop"]
+		}
+	}
+}

@@ -1,0 +1,9 @@
+.orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.orders-page > p {
+  margin: 0;
+}

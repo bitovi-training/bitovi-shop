@@ -1,0 +1,71 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 var(--space-sm);
+  border-radius: var(--radius-full);
+  border: var(--space-xxs) solid transparent;
+  font-family: var(--font-family-body);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Solid variants */
+.badge--default {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+.badge--primary {
+  background-color: var(--color-primary-light);
+  color: var(--color-surface);
+}
+
+.badge--accent {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.badge--success {
+  background-color: var(--color-success);
+  color: var(--color-surface);
+}
+
+.badge--error {
+  background-color: var(--color-error);
+  color: var(--color-surface);
+}
+
+/* Ghost variants */
+.badge--default-ghost {
+  background-color: var(--color-surface);
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.badge--primary-ghost {
+  background-color: var(--color-surface);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-light);
+}
+
+.badge--accent-ghost {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.badge--success-ghost {
+  background-color: var(--color-surface);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.badge--error-ghost {
+  background-color: var(--color-surface);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}

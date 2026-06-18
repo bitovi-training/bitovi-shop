@@ -1,0 +1,31 @@
+{
+  "name": "bitovi-shop",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "node shared/scripts/kill-port.js 3001 && node backend/index.js",
+    "frontend": "node shared/scripts/kill-port.js 5173 && vite --config frontend/vite.config.js --host",
+    "mcp:sql": "node backend/mcps/sql/index.js",
+    "mcp:shop": "node backend/mcps/shop/index.js",
+    "build": "npm run build:frontend",
+    "build:frontend": "vite build --config frontend/vite.config.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "express": "^4.21.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sql.js": "^1.13.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^8.2.2",
+    "vite": "^4.5.14"
+  },
+  "engines": {
+    "node": "24.4.1",
+    "npm": ">=10.0.0"
+  }
+}

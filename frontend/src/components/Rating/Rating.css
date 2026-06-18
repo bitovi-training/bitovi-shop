@@ -1,0 +1,15 @@
+.rating {
+  display: inline-flex;
+  gap: 1px;
+  line-height: 1;
+  font-size: var(--font-size-body);
+}
+
+.rating__star--filled {
+  color: var(--color-accent);
+}
+
+.rating__star--empty {
+  color: var(--color-accent);
+  opacity: 0.35;
+}

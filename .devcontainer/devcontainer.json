@@ -1,0 +1,30 @@
+{
+  "name": "Bitovi Shop - AI Training",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:2.1.0": {
+      "version": "24.4.1"
+    }
+  },
+  "updateContentCommand": "npm ci && npm install -g @anthropic-ai/claude-code && claude --version",
+  "postAttachCommand": "npm start",
+  "forwardPorts": [5173, 3001],
+  "portsAttributes": {
+    "5173": {
+      "label": "Frontend (Website)",
+      "onAutoForward": "notify"
+    },
+    "3001": {
+      "label": "Backend"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Anthropic.claude-code"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

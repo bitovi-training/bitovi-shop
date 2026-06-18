@@ -1,0 +1,22 @@
+.product-rating {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: var(--space-xxs) solid var(--color-border);
+  border-radius: var(--space-sm);
+  overflow: hidden;
+}
+
+.product-rating__review {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.product-rating__author {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 1;
+}

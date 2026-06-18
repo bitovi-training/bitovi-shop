@@ -1,0 +1,22 @@
+.line-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-sm);
+  width: 100%;
+  font-size: var(--font-size-body);
+  line-height: 1;
+}
+
+.line-item__label {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text);
+}
+
+.line-item__value {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-dark);
+}

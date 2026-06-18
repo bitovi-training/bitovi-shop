@@ -1,0 +1,26 @@
+.page-shell {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+.page-content {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--space-md); */
+}
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--space-sm); */
+}
+
+.page-heading p {
+  margin: 0;
+  line-height: 1.4;
+}
+

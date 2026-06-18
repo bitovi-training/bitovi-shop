@@ -1,0 +1,41 @@
+.checkout-section {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+
+.checkout-section__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-section__input {
+  max-width: none;
+}
+
+.checkout-section__input .text-input {
+  max-width: none;
+}
+
+.checkout-section__pricing {
+  border: var(--space-xxs) dashed var(--color-border);
+  border-radius: var(--space-sm);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.checkout-section__error {
+  margin: 0;
+  color: var(--color-error);
+}
+
+.checkout-section__submit {
+  width: 100%;
+  min-height: 26px;
+}

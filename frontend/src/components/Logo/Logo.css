@@ -1,0 +1,39 @@
+.logo {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  column-gap: var(--space-sm);
+  row-gap: var(--space-xs);
+  max-width: 100%;
+  line-height: 1;
+}
+
+.logo__name {
+  margin: 0;
+  color: var(--color-accent);
+  font-family: var(--font-family-heading);
+  font-size: 30px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.logo__shop {
+  margin: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-heading);
+  font-size: 30px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.logo--light .logo__shop {
+  color: var(--color-surface);
+}
+
+.logo--dark .logo__shop {
+  color: var(--color-primary-dark);
+}

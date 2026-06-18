@@ -1,0 +1,49 @@
+.confirmation-card {
+  padding: var(--space-md);
+}
+
+.confirmation-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.confirmation-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.confirmation-card__items-title {
+    margin: 0;
+    margin-bottom: var(--space-sm);
+}
+
+
+.confirmation-card__order-date {
+  margin: 0;
+  color: var(--color-text-light);
+}
+
+.confirmation-card__meta,
+.confirmation-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.confirmation-card__divider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.confirmation-card__total {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+

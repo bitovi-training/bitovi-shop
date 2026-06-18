@@ -1,0 +1,5 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--space-sm);
+  overflow: hidden;
+}
