@@ -873,6 +873,45 @@ function getAllProducts() {
   });
 }
 
+function searchProducts(searchQuery) {
+  const term = `%${searchQuery}%`;
+  const result = db.exec(
+    `SELECT
+      id,
+      slug,
+      name,
+      description,
+      price_cents,
+      image_path,
+      available_quantity,
+      in_stock,
+      width_cm,
+      height_cm,
+      depth_cm,
+      weight_kg,
+      delivery_window,
+      created_at
+     FROM products
+     WHERE name LIKE ? OR description LIKE ?
+     ORDER BY id ASC`,
+    [term, term],
+  );
+
+  if (result.length === 0) {
+    return [];
+  }
+
+  const [query] = result;
+  return query.values.map((valueRow) => {
+    const row = query.columns.reduce((accumulator, column, index) => {
+      accumulator[column] = valueRow[index];
+      return accumulator;
+    }, {});
+
+    return mapProduct(row);
+  });
+}
+
 function getProductById(productId) {
   const result = db.exec(
     `SELECT
@@ -1393,6 +1432,7 @@ export {
   executeSql,
   getSchemaSummary,
   getAllProducts,
+  searchProducts,
   getFeaturedProduct,
   getProductById,
   getGlobalCart,

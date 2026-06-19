@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useLiveRefresh from '../../hooks/useLiveRefresh';
 import PageTemplate from '../PageTemplate/PageTemplate';
 import FeaturedProductHero from './FeaturedProductHero/FeaturedProductHero';
@@ -15,10 +15,22 @@ export default function HomePage({
   const [featuredProduct, setFeaturedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  async function loadProducts() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(searchInput);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  const loadProducts = useCallback(async () => {
     try {
-      const response = await fetch('/api/products');
+      const url = searchQuery
+        ? `/api/products?search=${encodeURIComponent(searchQuery)}`
+        : '/api/products';
+      const response = await fetch(url);
       const payload = await response.json();
 
       if (!response.ok || !payload.ok) {
@@ -45,11 +57,11 @@ export default function HomePage({
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [searchQuery]);
 
   useEffect(() => {
     loadProducts();
-  }, []);
+  }, [loadProducts]);
 
   useLiveRefresh(loadProducts, { intervalMs: 5000 });
 
@@ -57,6 +69,8 @@ export default function HomePage({
     <PageTemplate
       currentPath={currentPath}
       cartCount={cartCount}
+      searchQuery={searchInput}
+      onSearchChange={setSearchInput}
       hero={(
         <FeaturedProductHero
           product={featuredProduct}
@@ -69,6 +83,9 @@ export default function HomePage({
       <section className="home-products" aria-label="Products">
         {isLoading ? <p>Loading products...</p> : null}
         {error ? <p>{error}</p> : null}
+        {!isLoading && !error && products.length === 0 && searchQuery
+          ? <p>No products found for &ldquo;{searchQuery}&rdquo;.</p>
+          : null}
         {!isLoading && !error
           ? products.map((product) => (
           <ProductCard

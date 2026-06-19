@@ -7,7 +7,7 @@ function isShopRoute(currentPath) {
   return currentPath === ROUTES.HOME || currentPath.startsWith('/products/');
 }
 
-export default function Header({ currentPath, cartCount = 0 }) {
+export default function Header({ currentPath, cartCount = 0, searchQuery = '', onSearchChange }) {
   const isShopActive = isShopRoute(currentPath);
   const isOrdersActive = currentPath === ROUTES.ORDERS;
   const isCartActive = currentPath === ROUTES.CART;
@@ -18,6 +18,17 @@ export default function Header({ currentPath, cartCount = 0 }) {
         <a className="site-header__logo-link" href="#/" aria-label="Go to home page">
           <Logo variant={LOGO_VARIANTS.LIGHT} />
         </a>
+
+        {isShopActive && onSearchChange ? (
+          <input
+            className="site-header__search"
+            type="search"
+            placeholder="Search products…"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            aria-label="Search products"
+          />
+        ) : null}
 
         <nav className="site-header__nav" aria-label="Main navigation">
           <a
