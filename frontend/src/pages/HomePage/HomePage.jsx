@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useLiveRefresh from '../../hooks/useLiveRefresh';
 import PageTemplate from '../PageTemplate/PageTemplate';
 import FeaturedProductHero from './FeaturedProductHero/FeaturedProductHero';
@@ -15,10 +15,22 @@ export default function HomePage({
   const [featuredProduct, setFeaturedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const debounceTimerRef = useRef(null);
 
-  async function loadProducts() {
+  function handleSearchChange(value) {
+    setSearchQuery(value);
+    clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      setDebouncedQuery(value);
+    }, 300);
+  }
+
+  async function loadProducts(query = debouncedQuery) {
     try {
-      const response = await fetch('/api/products');
+      const url = query ? `/api/products?search=${encodeURIComponent(query)}` : '/api/products';
+      const response = await fetch(url);
       const payload = await response.json();
 
       if (!response.ok || !payload.ok) {
@@ -48,15 +60,19 @@ export default function HomePage({
   }
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    loadProducts(debouncedQuery);
+  }, [debouncedQuery]);
 
-  useLiveRefresh(loadProducts, { intervalMs: 5000 });
+  useLiveRefresh(() => loadProducts(debouncedQuery), { intervalMs: 5000 });
+
+  const noResults = !isLoading && !error && products.length === 0 && debouncedQuery;
 
   return (
     <PageTemplate
       currentPath={currentPath}
       cartCount={cartCount}
+      searchQuery={searchQuery}
+      onSearchChange={handleSearchChange}
       hero={(
         <FeaturedProductHero
           product={featuredProduct}
@@ -69,7 +85,8 @@ export default function HomePage({
       <section className="home-products" aria-label="Products">
         {isLoading ? <p>Loading products...</p> : null}
         {error ? <p>{error}</p> : null}
-        {!isLoading && !error
+        {noResults ? <p>No products found for &ldquo;{debouncedQuery}&rdquo;.</p> : null}
+        {!isLoading && !error && !noResults
           ? products.map((product) => (
           <ProductCard
             key={product.id}
