@@ -6,3 +6,10 @@
   justify-content: center;
   padding-top: var(--space-md);
 }
+
+.home-products__empty {
+  width: 100%;
+  text-align: center;
+  color: var(--color-text-light, #666);
+  padding: var(--space-xl, 48px) 0;
+}

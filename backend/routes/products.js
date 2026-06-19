@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllProducts, getFeaturedProduct, getProductById } from '../database/db.js';
+import { getAllProducts, searchProducts, getFeaturedProduct, getProductById } from '../database/db.js';
 
 const router = express.Router();
 
@@ -9,7 +9,8 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   try {
-    const products = getAllProducts();
+    const searchQuery = typeof req.query.search === 'string' ? req.query.search.trim() : '';
+    const products = searchQuery ? searchProducts(searchQuery) : getAllProducts();
     return res.json({
       ok: true,
       products,

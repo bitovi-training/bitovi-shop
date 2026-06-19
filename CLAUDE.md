@@ -1,21 +1,23 @@
-# Claude Instructions For This Repo
+## Scope
 
-## Default Behavior For Feature Work
+Include only guidance that is invisible to code: human preferences, historical baggage, negative constraints, and decision rationale.
 
-- Implement the requested feature with the simplest, most straightforward approach.
-- Prefer minimal, targeted changes over refactors or architecture changes.
-- Do not add extra tooling or dependencies unless the user explicitly asks.
-- Specifically: do not install Playwright and do not add Playwright tests unless explicitly requested.
-- Do not run test suites, browser automation, or large validation steps unless explicitly requested.
-- After implementing, stop and let the user review and run verification themselves.
+## Project context and constraints
 
-## When Unsure
+### Environment and purpose
+- This codebase is used for workshop demos.
+- Prefer as few external dependencies as possible. If practical, build a small local implementation instead of adding a package.
+- The app is primarily run in GitHub Codespaces, often with forwarded ports for the frontend and backend.
+- All branches should stay aligned with `main` as the baseline and be kept up to date with mainline history.
+- The database is automatically cleared/reset when servers restart to keep demo runs reproducible.
+- The app is intended to be used with both Claude Code and GitHub Copilot.
 
-- Ask one short clarifying question only if a blocker prevents implementation.
-- Otherwise, make a reasonable, simple choice and proceed.
+### Workflow expectations
+- Primary workflows should remain runnable from the repo root scripts with minimal setup steps.
+- A clean start experience (`npm install` then `npm start`) is treated as a core quality bar for this repo.
+- Demo behavior should stay deterministic and easy to reset between runs.
 
-## Scope Discipline
-
-- Only change files needed for the request.
-- Avoid unrelated cleanup or stylistic churn.
-- Preserve existing patterns and conventions in the codebase.
+## Scoped context files
+- Backend rules: `backend/CLAUDE.md`
+- Frontend rules: `frontend/CLAUDE.md`
+- Shared rules: `shared/CLAUDE.md`
