@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useLiveRefresh from '../../hooks/useLiveRefresh';
 import PageTemplate from '../PageTemplate/PageTemplate';
 import FeaturedProductHero from './FeaturedProductHero/FeaturedProductHero';
@@ -15,30 +15,35 @@ export default function HomePage({
   const [featuredProduct, setFeaturedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchQueryRef = useRef('');
 
-  async function loadProducts() {
+  async function loadProducts(query = '') {
     try {
-      const response = await fetch('/api/products');
+      const url = query ? `/api/products?search=${encodeURIComponent(query)}` : '/api/products';
+      const response = await fetch(url);
       const payload = await response.json();
 
       if (!response.ok || !payload.ok) {
         throw new Error(payload?.error?.message || 'Failed to load products.');
       }
 
-      let featuredPayload = null;
-      try {
-        const featuredResponse = await fetch('/api/products/featured');
-        featuredPayload = await featuredResponse.json();
+      if (query === '') {
+        let featuredPayload = null;
+        try {
+          const featuredResponse = await fetch('/api/products/featured');
+          featuredPayload = await featuredResponse.json();
 
-        if (!featuredResponse.ok || !featuredPayload?.ok) {
+          if (!featuredResponse.ok || !featuredPayload?.ok) {
+            featuredPayload = null;
+          }
+        } catch {
           featuredPayload = null;
         }
-      } catch {
-        featuredPayload = null;
+        setFeaturedProduct(featuredPayload?.product || null);
       }
 
       setProducts(Array.isArray(payload.products) ? payload.products : []);
-      setFeaturedProduct(featuredPayload?.product || null);
       setError('');
     } catch (fetchError) {
       setError(fetchError.message || 'Failed to load products.');
@@ -51,12 +56,27 @@ export default function HomePage({
     loadProducts();
   }, []);
 
-  useLiveRefresh(loadProducts, { intervalMs: 5000 });
+  useLiveRefresh(() => loadProducts(searchQueryRef.current), { intervalMs: 5000 });
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      loadProducts(searchQuery);
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
+
+  function handleSearchChange(value) {
+    searchQueryRef.current = value;
+    setSearchQuery(value);
+  }
 
   return (
     <PageTemplate
       currentPath={currentPath}
       cartCount={cartCount}
+      searchQuery={searchQuery}
+      onSearchChange={handleSearchChange}
       hero={(
         <FeaturedProductHero
           product={featuredProduct}
@@ -69,6 +89,9 @@ export default function HomePage({
       <section className="home-products" aria-label="Products">
         {isLoading ? <p>Loading products...</p> : null}
         {error ? <p>{error}</p> : null}
+        {!isLoading && !error && products.length === 0 && searchQuery
+          ? <p className="home-products__empty">No products found for &ldquo;{searchQuery}&rdquo;</p>
+          : null}
         {!isLoading && !error
           ? products.map((product) => (
           <ProductCard

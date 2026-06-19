@@ -837,27 +837,23 @@ function clearGlobalCart() {
   return getGlobalCart();
 }
 
-function getAllProducts() {
-  const result = db.exec(
-    `SELECT
-      id,
-      slug,
-      name,
-      description,
-      price_cents,
-      image_path,
-      available_quantity,
-      in_stock,
-      width_cm,
-      height_cm,
-      depth_cm,
-      weight_kg,
-      delivery_window,
-      created_at
-     FROM products
-     ORDER BY id ASC`,
-  );
+const PRODUCT_SELECT_COLUMNS = `
+  id,
+  slug,
+  name,
+  description,
+  price_cents,
+  image_path,
+  available_quantity,
+  in_stock,
+  width_cm,
+  height_cm,
+  depth_cm,
+  weight_kg,
+  delivery_window,
+  created_at`;
 
+function mapProductQueryResult(result) {
   if (result.length === 0) {
     return [];
   }
@@ -871,6 +867,29 @@ function getAllProducts() {
 
     return mapProduct(row);
   });
+}
+
+function getAllProducts() {
+  const result = db.exec(
+    `SELECT ${PRODUCT_SELECT_COLUMNS}
+     FROM products
+     ORDER BY id ASC`,
+  );
+
+  return mapProductQueryResult(result);
+}
+
+function searchProducts(query) {
+  const pattern = `%${query.toLowerCase()}%`;
+  const result = db.exec(
+    `SELECT ${PRODUCT_SELECT_COLUMNS}
+     FROM products
+     WHERE LOWER(name) LIKE ? OR LOWER(description) LIKE ?
+     ORDER BY id ASC`,
+    [pattern, pattern],
+  );
+
+  return mapProductQueryResult(result);
 }
 
 function getProductById(productId) {
@@ -1393,6 +1412,7 @@ export {
   executeSql,
   getSchemaSummary,
   getAllProducts,
+  searchProducts,
   getFeaturedProduct,
   getProductById,
   getGlobalCart,

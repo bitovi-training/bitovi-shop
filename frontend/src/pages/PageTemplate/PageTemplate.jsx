@@ -9,13 +9,20 @@ export default function PageTemplate({
   subtitle,
   hero,
   breadcrumbItems = [],
+  searchQuery,
+  onSearchChange,
   children,
 }) {
   const hasBreadcrumbs = Array.isArray(breadcrumbItems) && breadcrumbItems.length > 0;
 
   return (
     <div className="page-shell">
-      <Header currentPath={currentPath} cartCount={cartCount} />
+      <Header
+        currentPath={currentPath}
+        cartCount={cartCount}
+        searchQuery={searchQuery}
+        onSearchChange={onSearchChange}
+      />
 
       {hero || null}
 
