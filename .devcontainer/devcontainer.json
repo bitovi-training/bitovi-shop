@@ -7,13 +7,13 @@
       "version": "24.4.1"
     }
   },
-  "updateContentCommand": "npm ci && npm install -g @anthropic-ai/claude-code && claude --version",
+  "updateContentCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci && sudo env \"PATH=$PATH\" npx playwright install-deps chromium && npm run e2e:install && npm install -g @anthropic-ai/claude-code && claude --version",
   "postAttachCommand": "npm start",
   "forwardPorts": [5173, 3001],
   "portsAttributes": {
     "5173": {
       "label": "Frontend (Website)",
-      "onAutoForward": "notify"
+      "onAutoForward": "openBrowser"
     },
     "3001": {
       "label": "Backend"
@@ -25,6 +25,10 @@
         "Anthropic.claude-code"
       ]
     }
+  },
+  "remoteEnv": {
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1",
+    "PLAYWRIGHT_BROWSERS_PATH": "/home/vscode/.cache/ms-playwright"
   },
   "remoteUser": "vscode"
 }

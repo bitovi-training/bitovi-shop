@@ -1,5 +1,7 @@
 {
   "enabledMcpjsonServers": [
-    "shop"
+    "shop",
+    "sql",
+    "playwright_mcp"
   ]
 }

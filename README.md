@@ -57,6 +57,18 @@ Detailed request/response schemas and error codes live in [backend/README.md](ba
 - `npm run mcp:sql` runs the SQL MCP server
 - `npm run mcp:shop` runs the shop MCP server
 
+## Playwright In Codespaces
+
+- E2E and Playwright MCP share the same browser cache at `.cache/ms-playwright`.
+- Chromium is installed once and then reused by both `npm run test:e2e` and the Playwright MCP server.
+- The devcontainer prebuild runs Playwright dependency setup and browser install so workshop environments are ready to go.
+
+### Playwright Scripts
+
+- `npm run e2e:install` installs Chromium into the shared browser cache (no-op if already installed).
+- `npm run test:e2e` runs setup and then executes Playwright tests.
+- `npm run test:e2e:list` lists discovered Playwright tests.
+
 ## MCP Servers
 
 - The SQL MCP server exposes schema inspection and raw SQL against the live app backend.

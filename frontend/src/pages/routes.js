@@ -34,7 +34,7 @@ const STATIC_ROUTE_MAP = {
 const PRODUCT_ROUTE_PATTERN = /^\/products\/([^/]+)$/;
 
 export function getProductPath(productId) {
-  return `/products/${encodeURIComponent(productId)}`;
+  return `/products/${productId}`;
 }
 
 function normalizePath(path) {
@@ -43,11 +43,6 @@ function normalizePath(path) {
   }
 
   const withLeadingSlash = path.startsWith('/') ? path : `/${path}`;
-
-  if (withLeadingSlash.length > 1 && withLeadingSlash.endsWith('/')) {
-    return withLeadingSlash.slice(0, -1);
-  }
-
   return withLeadingSlash;
 }
 

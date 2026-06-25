@@ -29,11 +29,26 @@
 }
 
 .added-to-cart-toast__label {
-  flex: 1;
   margin: 0;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-bold);
+  color: color-mix(in srgb, var(--color-text) 75%, transparent);
+  line-height: 1;
+}
+
+.added-to-cart-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.added-to-cart-toast__product-name {
+  margin: 4px 0 0;
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .added-to-cart-toast__icon {

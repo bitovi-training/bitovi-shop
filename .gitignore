@@ -3,3 +3,11 @@ frontend/dist/
 backend/database/todos.db
 .DS_Store
 !.claude/settings.local.json
+.cache/
+.playwright-mcp/
+playwright-report/
+test-results/
+debug-screenshots/**/*.png
+debug-screenshots/**/*.jpg
+debug-screenshots/**/*.jpeg
+debug-screenshots/**/*.webp

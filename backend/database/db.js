@@ -67,6 +67,14 @@ function mapOrder(row) {
   };
 }
 
+function normalizeReviewTextForStorage(value) {
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  return value.toLocaleUpperCase('en-US');
+}
+
 function persist() {
   if (!db) {
     return;
@@ -911,7 +919,7 @@ function getProductById(productId) {
     `SELECT id, author, quote, stars
      FROM product_reviews
      WHERE product_slug = ?
-     ORDER BY sort_order ASC, id ASC`,
+     ORDER BY id DESC`,
     [product.slug],
   );
 
@@ -927,6 +935,77 @@ function getProductById(productId) {
   return {
     ...product,
     reviews,
+  };
+}
+
+function addProductReview(productId, { author, quote, stars } = {}) {
+  if (!Number.isInteger(productId) || productId <= 0) {
+    const error = new Error('Invalid product id.');
+    error.code = 'INVALID_PRODUCT_ID';
+    throw error;
+  }
+
+  const trimmedAuthor = typeof author === 'string' ? author.trim() : '';
+  const trimmedQuote = typeof quote === 'string' ? quote.trim() : '';
+  const storedQuote = normalizeReviewTextForStorage(trimmedQuote);
+  const parsedStars = Number.parseInt(stars, 10);
+
+  if (!trimmedAuthor) {
+    const error = new Error('Author is required.');
+    error.code = 'INVALID_REVIEW_AUTHOR';
+    throw error;
+  }
+
+  if (!trimmedQuote) {
+    const error = new Error('Review text is required.');
+    error.code = 'INVALID_REVIEW_QUOTE';
+    throw error;
+  }
+
+  if (!Number.isInteger(parsedStars) || parsedStars < 1 || parsedStars > 5) {
+    const error = new Error('Stars must be an integer between 1 and 5.');
+    error.code = 'INVALID_REVIEW_STARS';
+    throw error;
+  }
+
+  const productResult = db.exec(
+    `SELECT slug
+     FROM products
+     WHERE id = ?
+     LIMIT 1`,
+    [productId],
+  );
+
+  if (!productResult || productResult.length === 0 || productResult[0].values.length === 0) {
+    const error = new Error('Product not found.');
+    error.code = 'PRODUCT_NOT_FOUND';
+    throw error;
+  }
+
+  const productSlug = productResult[0].values[0][0];
+
+  const nextSortOrderResult = db.exec(
+    `SELECT COALESCE(MAX(sort_order), 0) + 1
+     FROM product_reviews
+     WHERE product_slug = ?`,
+    [productSlug],
+  );
+  const nextSortOrder = nextSortOrderResult?.[0]?.values?.[0]?.[0] ?? 1;
+
+  db.run(
+    `INSERT INTO product_reviews (product_slug, sort_order, author, quote, stars)
+     VALUES (?, ?, ?, ?, ?)`,
+    [productSlug, nextSortOrder, trimmedAuthor, storedQuote, parsedStars],
+  );
+
+  const insertedRowId = db.exec('SELECT last_insert_rowid() AS id')?.[0]?.values?.[0]?.[0];
+  persist();
+
+  return {
+    id: `${productId}-${insertedRowId}`,
+    author: trimmedAuthor,
+    quote: storedQuote,
+    stars: parsedStars,
   };
 }
 
@@ -1358,7 +1437,7 @@ function createProduct(productData) {
       `SELECT id, author, quote, stars
        FROM product_reviews
        WHERE product_slug = ?
-       ORDER BY sort_order ASC, id ASC`,
+       ORDER BY id DESC`,
       [product.slug],
     );
 
@@ -1395,6 +1474,7 @@ export {
   getAllProducts,
   getFeaturedProduct,
   getProductById,
+  addProductReview,
   getGlobalCart,
   addGlobalCartItem,
   removeGlobalCartItem,

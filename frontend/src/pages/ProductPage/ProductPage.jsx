@@ -15,6 +15,23 @@ const PLACEHOLDER_SPECS = [
   { label: 'Delivery', value: '3-5 business days' },
 ];
 
+async function parseApiResponse(response) {
+  const contentType = response.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    return response.json();
+  }
+
+  const text = await response.text();
+  return {
+    ok: false,
+    error: {
+      message: text?.trim() || 'Unexpected response from server.',
+      code: 'INVALID_API_RESPONSE',
+    },
+  };
+}
+
 export default function ProductPage({
   currentPath,
   productId,
@@ -41,7 +58,7 @@ export default function ProductPage({
 
     try {
       const response = await fetch(`/api/products/${encodeURIComponent(productId)}`);
-      const payload = await response.json();
+      const payload = await parseApiResponse(response);
 
       if (!response.ok || !payload?.ok) {
         throw new Error(payload?.error?.message || 'Failed to load product details.');
@@ -63,6 +80,37 @@ export default function ProductPage({
   }, [productId]);
 
   useLiveRefresh(loadProduct, { enabled: Boolean(productId), intervalMs: 5000 });
+
+  async function handleAddReview({ author, quote, stars }) {
+    if (!productId) {
+      throw new Error('Missing product ID.');
+    }
+
+    const response = await fetch(`/api/products/${encodeURIComponent(productId)}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ author, quote, stars }),
+    });
+
+    const payload = await parseApiResponse(response);
+
+    if (!response.ok || !payload?.ok || !payload?.review) {
+      throw new Error(payload?.error?.message || 'Failed to submit review.');
+    }
+
+    setProduct((previousProduct) => {
+      if (!previousProduct) {
+        return previousProduct;
+      }
+
+      return {
+        ...previousProduct,
+        reviews: [payload.review, ...(previousProduct.reviews || [])],
+      };
+    });
+  }
 
   const productReviews = (product?.reviews || []).map((review) => ({
     rating: review.stars,
@@ -89,7 +137,7 @@ export default function ProductPage({
         {!isLoading && !error && product ? (
           <div className="product-page__secondary">
             <ProductSpecs specs={PLACEHOLDER_SPECS} />
-            <CustomerReviews reviews={productReviews} />
+            <CustomerReviews reviews={productReviews} onAddReview={handleAddReview} />
           </div>
         ) : null}
       </section>

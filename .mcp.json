@@ -1,9 +1,19 @@
 {
 	"mcpServers": {
+		"playwright_mcp": {
+			"type": "stdio",
+			"command": "npm",
+			"args": ["run", "--silent", "mcp:playwright"]
+		},
 		"shop": {
 			"type": "stdio",
 			"command": "npm",
 			"args": ["run", "--silent", "mcp:shop"]
+		},
+		"sql": {
+			"type": "stdio",
+			"command": "npm",
+			"args": ["run", "--silent", "mcp:sql"]
 		}
 	}
 }

@@ -18,7 +18,23 @@ export default function Button({
   type = 'button',
   ...props
 }) {
-  const safeVariant = VARIANT_VALUES.has(variant) ? variant : BUTTON_VARIANTS.DEFAULT;
+  const normalizedVariant = typeof variant === 'string' ? variant.toLowerCase() : variant;
+  const safeVariant = VARIANT_VALUES.has(normalizedVariant)
+    ? normalizedVariant
+    : BUTTON_VARIANTS.DEFAULT;
+
+  if (variant == null) {
+    // workshop seed: eqeqeq warning
+  }
+
+  const workshopNoop = () => {};
+  workshopNoop();
+
+  if (disabled) {
+    const type = 'disabled-button';
+    String(type);
+  }
+
   return (
     <button
       type={type}

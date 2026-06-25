@@ -5,7 +5,7 @@ import { executeSql, getSchema } from './backendClient.js';
 
 const server = new Server(
   {
-    name: 'sql-mcp',
+    name: 'sql',
     version: '1.0.0',
   },
   {
@@ -23,7 +23,7 @@ const toolDefinitions = [
       type: 'object',
       properties: {
         sql: { type: 'string', minLength: 1 },
-        params: { type: 'array' },
+        params: { type: 'array', items: {} },
       },
     },
   },
