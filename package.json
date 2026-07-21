@@ -10,7 +10,11 @@
     "mcp:sql": "node backend/mcps/sql/index.js",
     "mcp:shop": "node backend/mcps/shop/index.js",
     "build": "npm run build:frontend",
-    "build:frontend": "vite build --config frontend/vite.config.js"
+    "build:frontend": "vite build --config frontend/vite.config.js",
+    "figma:preview": "figma connect preview",
+    "figma:publish": "figma connect publish",
+    "figma:unpublish": "figma connect unpublish",
+    "figma:parse": "figma connect parse"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
@@ -20,6 +24,7 @@
     "sql.js": "^1.13.0"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.4.9",
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^8.2.2",
     "vite": "^4.5.14"

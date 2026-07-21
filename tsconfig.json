@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "types": ["@figma/code-connect/figma-types"],
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "noEmit": true,
+    "strict": false
+  },
+  "include": ["**/*.figma.ts"],
+  "exclude": ["node_modules", "frontend/dist"]
+}
