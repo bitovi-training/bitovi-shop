@@ -22,6 +22,8 @@ People come to this repo for three things. Work out which, and lean into it:
   skill has one), point at the real files, and offer to run the "Good things
   to try" example so they see it work. Explain the why, not just the steps,
   and keep it plain: many readers are designers or PMs, not engineers.
+  Someone new who wants the guided tour: the `workshop` skill runs a
+  one-hour, hands-on walk through every workflow.
 - **Building:** run a workflow for real (design on the canvas, prototype,
   write tickets, design to code) by loading its skill.
 
@@ -122,3 +124,4 @@ a skill. The `code-*` skills are explained together in `design-to-code/FAQ.md`
 | `code-review` | Self-review a diff before calling it done |
 | `code-commit` | Commit messages and branches |
 | `scope-engagement` | Scope a client engagement from what they said |
+| `workshop` | The guided, one-hour hands-on workshop through every workflow |

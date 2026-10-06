@@ -22,6 +22,7 @@ down, scope against the code, build feedback loops) carry over to others.
 | Understand what we sell | [The Design-to-Code menu](design-to-code-menu.md) |
 | Scope a new engagement from a call or a proposal | [Scoping an engagement](scoping-an-engagement.md), or ask the agent to use `scope-engagement` |
 | Understand how we make a codebase AI-ready | [The codebase enablement checklist](codebase-enablement-checklist.md) |
+| Learn all of it, hands-on, in an hour | [The workshop](workshop.md): say "start the workshop" to the agent |
 | Learn a workflow | The skill's `FAQ.md` in `.claude/skills/<name>/` |
 | See one run | The "Good things to try" list at the end of each FAQ |
 
