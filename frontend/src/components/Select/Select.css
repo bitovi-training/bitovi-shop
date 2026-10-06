@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-/* Invisible native select stretched over the whole box — captures all clicks */
+/* Invisible native select stretched over the whole box, so it captures all clicks */
 .select-field__control--overlay {
   position: absolute;
   inset: 0;

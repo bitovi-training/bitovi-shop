@@ -1,0 +1,226 @@
+# Rules about a single component used on its own.
+
+rules:
+  - id: badge-ghost-on-surface
+    text: >-
+      Ghost badge variants rely on the surface behind them for contrast. They
+      belong on --color-surface. On --color-background they wash out and the
+      border disappears.
+    scope: component
+    strength: should
+    source: inferred
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Badge, Card]
+    tokens: ["--color-background", "--color-surface"]
+
+  - id: button-error-variant-scope
+    text: >-
+      The error button variant is for destructive confirmation only, such as
+      deleting an order or emptying a cart. It is not for navigation and not for
+      a form that merely failed validation.
+    scope: component
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Button]
+
+  - id: button-one-primary
+    text: >-
+      One primary button per view. Primary is the recommended path, and a screen
+      with three primary buttons has not recommended anything. Secondary actions
+      use the default variant.
+    scope: component
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Button]
+
+  - id: rating-read-only
+    text: >-
+      Rating is a display component. Where a customer submits a rating, that is
+      an input pattern, not a Rating with click handlers attached.
+    scope: component
+    strength: should
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Rating]
+
+  - id: logo-variant-by-background
+    text: >-
+      Use the Light logo on dark fills (--color-primary and darker) and the Dark
+      logo on --color-surface or --color-background. Never place either logo on
+      a fill where its wordmark loses contrast.
+    scope: component
+    strength: must
+    source: inferred
+    status: proposed
+    components: [Logo]
+    tokens: [--color-primary, --color-surface, --color-background]
+    rationale: >-
+      Every page places Logo[Variant=Light] on the --color-primary header. The
+      Dark variant exists in the library (9:168) for light backgrounds.
+
+  - id: total-labels
+    text: >-
+      Order math uses the same labels everywhere: Subtotal, then Tax with its
+      rate in parentheses, then Total. Don't rename the final line per screen
+      ("Final Price", "Order Total", "Cart Total").
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [LineItem]
+    rationale: >-
+      The designs currently disagree: Cart & Checkout uses Cart Total / Final
+      Price, Orders uses Total, Order Confirmation uses Subtotal / Order Total.
+      Drafted to standardize; the wording is a proposal.
+
+  - id: quantity-format
+    text: >-
+      Quantity is written one way everywhere: the item name followed by "× n"
+      (Sunset Mug × 3), shown only when the quantity is more than one.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [CartItem, LineItem]
+    rationale: >-
+      The designs disagree: the cart shows "$24.00 - Qty 3" and the order
+      confirmation shows "Sunset Mug x5". Drafted to standardize; the exact
+      format is a proposal.
+
+  - id: product-card-anatomy
+    text: >-
+      A product card is, top to bottom: image on a tinted panel, name, a
+      description clamped to two lines with an ellipsis, then one row with the
+      price on the left and the action on the right. Nothing else goes on the
+      card.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [ProductCard]
+    rationale: >-
+      All eight product cards on the Home page (12:420 instances) follow this
+      exact structure.
+
+  - id: stock-status-badges
+    text: >-
+      Stock status always uses the same badge: Success for "in stock", Error for
+      "out of stock". Neutral information, like a count or a "featured" tag,
+      uses Primary or Default, never Success or Error.
+    scope: component
+    strength: must
+    source: inferred
+    status: proposed
+    components: [Badge]
+    rationale: >-
+      Home: "In stock" is Success, "out of stock" is Error, "Featured pick" and
+      "8 products total" are Primary. Applies semantic-color-meaning to stock
+      specifically.
+
+  - id: badge-label-style
+    text: >-
+      Badge labels are one to three words in sentence case ("In stock",
+      "Featured pick"). A badge that needs a sentence is the wrong component.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [Badge]
+    rationale: >-
+      All badges in the designs are 1-3 words. Casing is currently mixed ("out
+      of stock" lowercase vs "Featured pick"), so this proposes sentence case.
+
+  - id: button-shape-and-width
+    text: >-
+      Buttons are pills (--radius-full) that hug their label. The one exception
+      is the submit button at the end of a form, which spans the full width of
+      the form column.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [Button]
+    tokens: [--radius-full]
+    rationale: >-
+      Every button across the five pages hugs its label, except "Place Order" on
+      Cart & Checkout, which spans the checkout column.
+
+  - id: breadcrumb-current-page
+    text: >-
+      The last breadcrumb is the current page: bold, not a link. Earlier crumbs
+      are links in regular weight, separated by a chevron-right icon.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [Breadcrumb]
+    rationale: >-
+      Product Details (Home > Mono Lamp) and Order Confirmation (Home > Cart >
+      Order Confirmation) both bold only the final crumb.
+
+  - id: order-card-anatomy
+    text: >-
+      An order card shows the order id as its title with the date right-aligned
+      on the same line, then the customer line in light text, then the line
+      items, a divider, and the total.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [OrderCard]
+    rationale: >-
+      All three order cards on Orders (45:1026) and the confirmation card
+      (66:869) follow this order.
+
+  - id: review-anatomy
+    text: >-
+      A review shows the star rating first, then the review text in quotation
+      marks, then the author's name below in smaller --color-text-light text.
+      Stars are the one place accent appears outside actions.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [CustomerReview, Rating]
+    tokens: [--color-accent, --color-text-light]
+    rationale: >-
+      All three reviews on Product Details (16:143 instances) follow this
+      structure with accent-colored stars.
+
+  - id: product-image-panel
+    text: >-
+      Product images always sit on a lightly tinted panel that fills the image
+      area, at every size from the cart thumbnail to the product page. Images
+      never sit directly on the white card.
+    scope: component
+    strength: consider
+    source: inferred
+    status: proposed
+    components: [ProductCard, ProductDetailsCard, CartItem]
+    rationale: >-
+      Every product image across Home, Product Details and Cart uses a tinted
+      background panel.
+
+  - id: toast-confirms-add
+    text: >-
+      Adding to cart is confirmed with the Added to Cart toast (product
+      thumbnail plus "Added to cart"), not by navigating away or opening the
+      cart.
+    scope: component
+    strength: should
+    source: inferred
+    status: proposed
+    components: [AddedToCartToast, Toast]
+    rationale: >-
+      The Added to Cart Toast (150:800) is the only feedback component for
+      add-to-cart in the library.

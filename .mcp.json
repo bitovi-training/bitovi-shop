@@ -1,9 +1,38 @@
 {
-	"mcpServers": {
-		"shop": {
-			"type": "stdio",
-			"command": "npm",
-			"args": ["run", "--silent", "mcp:shop"]
-		}
-	}
+  "mcpServers": {
+    "shop": {
+      "type": "stdio",
+      "command": "npm",
+      "args": [
+        "run",
+        "--silent",
+        "mcp:shop"
+      ]
+    },
+    "design-rules": {
+      "type": "stdio",
+      "command": "npm",
+      "args": [
+        "run",
+        "--silent",
+        "mcp:design-rules"
+      ]
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp/authv2"
+    }
+  }
 }

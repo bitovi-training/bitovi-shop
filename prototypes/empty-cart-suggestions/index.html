@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- Prototype: empty cart with product suggestions. Composed from the generated
+     component mocks (*.mock.html); see prototype.md. Not production code. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype: empty cart suggestions</title>
+<link rel="stylesheet" href="../shop.css">
+<style>
+  /* Prototype-only layout. Uses existing tokens; nothing new is styled by hand. */
+  .suggestions { margin-top: var(--space-xl); }
+  .suggestions h2 { margin: 0 0 var(--space-sm); }
+  .suggestions .home-products { justify-content: flex-start; }
+  .proto-toast { position: fixed; right: var(--space-md); bottom: var(--space-md); display: none; }
+  .proto-toast.is-visible { display: block; }
+</style>
+</head>
+<body>
+<div class="page-shell">
+<header data-component="Header" data-state="empty cart" class="site-header"><div class="site-header__inner"><a class="site-header__logo-link" href="#/" aria-label="Go to home page"><div class="logo logo--light" aria-label="bitovi shop logo"><span class="logo__name" aria-hidden="true">bitovi</span><span class="logo__shop">shop</span></div></a><nav class="site-header__nav" aria-label="Main navigation"><a class="site-header__link site-header__link--active" href="#/">Shop</a><a class="site-header__link" href="#/orders">Orders</a><a class="site-header__cart" href="#/cart" aria-label="Go to cart with 0 items"><span class="icon icon--cart site-header__cart-icon"><span class="icon__svg icon__svg--mask" style="--icon-mask-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzMiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAzMyAzNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciIgZD0iTTQuMTI1IDUuNjk0MzRINi44NzVMOS45IDIwLjY0MjNIMjQuNzVMMjcuNSA5Ljk2NTE3SDEwLjQ1IiBzdHJva2U9IiMyMzMxMzIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGlkPSJWZWN0b3JfMiIgZD0iTTEzLjc1IDI4LjQ3MjJDMTQuMTE0NyAyOC40NzIyIDE0LjQ2NDQgMjguMzIyMiAxNC43MjIzIDI4LjA1NTNDMTQuOTgwMSAyNy43ODgzIDE1LjEyNSAyNy40MjYyIDE1LjEyNSAyNy4wNDg2QzE1LjEyNSAyNi42NzEgMTQuOTgwMSAyNi4zMDg5IDE0LjcyMjMgMjYuMDQyQzE0LjQ2NDQgMjUuNzc1IDE0LjExNDcgMjUuNjI1IDEzLjc1IDI1LjYyNUMxMy4zODUzIDI1LjYyNSAxMy4wMzU2IDI1Ljc3NSAxMi43Nzc3IDI2LjA0MkMxMi41MTk5IDI2LjMwODkgMTIuMzc1IDI2LjY3MSAxMi4zNzUgMjcuMDQ4NkMxMi4zNzUgMjcuNDI2MiAxMi41MTk5IDI3Ljc4ODMgMTIuNzc3NyAyOC4wNTUzQzEzLjAzNTYgMjguMzIyMiAxMy4zODUzIDI4LjQ3MjIgMTMuNzUgMjguNDcyMloiIGZpbGw9IiMyMzMxMzIiLz4KPHBhdGggaWQ9IlZlY3Rvcl8zIiBkPSJNMjMuMzc1IDI4LjQ3MjJDMjMuNzM5NyAyOC40NzIyIDI0LjA4OTQgMjguMzIyMiAyNC4zNDczIDI4LjA1NTNDMjQuNjA1MSAyNy43ODgzIDI0Ljc1IDI3LjQyNjIgMjQuNzUgMjcuMDQ4NkMyNC43NSAyNi42NzEgMjQuNjA1MSAyNi4zMDg5IDI0LjM0NzMgMjYuMDQyQzI0LjA4OTQgMjUuNzc1IDIzLjczOTcgMjUuNjI1IDIzLjM3NSAyNS42MjVDMjMuMDEwMyAyNS42MjUgMjIuNjYwNiAyNS43NzUgMjIuNDAyNyAyNi4wNDJDMjIuMTQ0OSAyNi4zMDg5IDIyIDI2LjY3MSAyMiAyNy4wNDg2QzIyIDI3LjQyNjIgMjIuMTQ0OSAyNy43ODgzIDIyLjQwMjcgMjguMDU1M0MyMi42NjA2IDI4LjMyMjIgMjMuMDEwMyAyOC40NzIyIDIzLjM3NSAyOC40NzIyWiIgZmlsbD0iIzIzMzEzMiIvPgo8L3N2Zz4K)" aria-hidden="true"></span></span><span class="site-header__cart-count">0</span></a></nav></div></header>
+<main class="page-content">
+  <section class="cart-page" aria-label="Cart items">
+    <h1 class="cart-page__title">Your Cart</h1>
+    <div class="cart-page__empty-state">
+      <p class="cart-page__empty">Your cart is empty. Here are a few things people picked up this week.</p>
+      <button data-component="Button" data-state="accent" data-variant="accent" type="button" class="cart-page__empty-cta button button--accent">Go to shop</button>
+    </div>
+  </section>
+  <section class="suggestions" aria-label="Suggested products">
+    <h2>You might also like</h2>
+    <div class="home-products">
+<article data-component="ProductCard" data-state="in stock" class="card home-product-card" aria-label="Sunset Mug"><a class="home-product-card__image-link" href="#/products/1"><div class="home-product-card__image-wrap" aria-hidden="true"><div class="home-product-card__image-placeholder"></div></div></a><div class="home-product-card__content"><a href="#/products/1" class="home-product-card__name-link"><h2>Sunset Mug</h2></a><p class="home-product-card__description">Ceramic mug with matte glaze and ergonomic handle.</p><div class="home-product-card__footer"><span class="home-product-card__price">$24.00</span></div><button type="button" class="button button--accent home-product-card__button">Add to cart</button></div></article>
+<article data-component="ProductCard" data-state="in stock" class="card home-product-card" aria-label="Desk Mat"><a class="home-product-card__image-link" href="#/products/1"><div class="home-product-card__image-wrap" aria-hidden="true"><div class="home-product-card__image-placeholder"></div></div></a><div class="home-product-card__content"><a href="#/products/1" class="home-product-card__name-link"><h2>Desk Mat</h2></a><p class="home-product-card__description">Non-slip desk mat designed for focused work sessions.</p><div class="home-product-card__footer"><span class="home-product-card__price">$45.00</span></div><button type="button" class="button button--accent home-product-card__button">Add to cart</button></div></article>
+<article data-component="ProductCard" data-state="out of stock" class="card home-product-card" aria-label="Mono Lamp"><a class="home-product-card__image-link" href="#/products/2"><div class="home-product-card__image-wrap" aria-hidden="true"><div class="home-product-card__image-placeholder"></div></div></a><div class="home-product-card__content"><a href="#/products/2" class="home-product-card__name-link"><h2>Mono Lamp</h2></a><p class="home-product-card__description">Minimal desk lamp with warm dimmable light.</p><div class="home-product-card__footer"><span class="home-product-card__price">$79.00</span><span class="badge badge--error">out of stock</span></div></div></article>
+<article data-component="ProductCard" data-state="in stock" class="card home-product-card" aria-label="Daily Notebook"><a class="home-product-card__image-link" href="#/products/1"><div class="home-product-card__image-wrap" aria-hidden="true"><div class="home-product-card__image-placeholder"></div></div></a><div class="home-product-card__content"><a href="#/products/1" class="home-product-card__name-link"><h2>Daily Notebook</h2></a><p class="home-product-card__description">Thread-bound notebook with dot grid recycled paper.</p><div class="home-product-card__footer"><span class="home-product-card__price">$18.00</span></div><button type="button" class="button button--accent home-product-card__button">Add to cart</button></div></article>
+    </div>
+  </section>
+</main>
+</div>
+<div class="proto-toast"><div data-component="AddedToCartToast" data-state="added to cart" class="toast added-to-cart-toast" role="status" aria-label="Sunset Mug added to cart"><div class="added-to-cart-toast__thumb" aria-hidden="true"><div class="added-to-cart-toast__image-fallback"></div></div><p class="added-to-cart-toast__label">Added to cart</p><span class="icon icon--cart added-to-cart-toast__icon"><span class="icon__svg icon__svg--mask" style="--icon-mask-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzMiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAzMyAzNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciIgZD0iTTQuMTI1IDUuNjk0MzRINi44NzVMOS45IDIwLjY0MjNIMjQuNzVMMjcuNSA5Ljk2NTE3SDEwLjQ1IiBzdHJva2U9IiMyMzMxMzIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGlkPSJWZWN0b3JfMiIgZD0iTTEzLjc1IDI4LjQ3MjJDMTQuMTE0NyAyOC40NzIyIDE0LjQ2NDQgMjguMzIyMiAxNC43MjIzIDI4LjA1NTNDMTQuOTgwMSAyNy43ODgzIDE1LjEyNSAyNy40MjYyIDE1LjEyNSAyNy4wNDg2QzE1LjEyNSAyNi42NzEgMTQuOTgwMSAyNi4zMDg5IDE0LjcyMjMgMjYuMDQyQzE0LjQ2NDQgMjUuNzc1IDE0LjExNDcgMjUuNjI1IDEzLjc1IDI1LjYyNUMxMy4zODUzIDI1LjYyNSAxMy4wMzU2IDI1Ljc3NSAxMi43Nzc3IDI2LjA0MkMxMi41MTk5IDI2LjMwODkgMTIuMzc1IDI2LjY3MSAxMi4zNzUgMjcuMDQ4NkMxMi4zNzUgMjcuNDI2MiAxMi41MTk5IDI3Ljc4ODMgMTIuNzc3NyAyOC4wNTUzQzEzLjAzNTYgMjguMzIyMiAxMy4zODUzIDI4LjQ3MjIgMTMuNzUgMjguNDcyMloiIGZpbGw9IiMyMzMxMzIiLz4KPHBhdGggaWQ9IlZlY3Rvcl8zIiBkPSJNMjMuMzc1IDI4LjQ3MjJDMjMuNzM5NyAyOC40NzIyIDI0LjA4OTQgMjguMzIyMiAyNC4zNDczIDI4LjA1NTNDMjQuNjA1MSAyNy43ODgzIDI0Ljc1IDI3LjQyNjIgMjQuNzUgMjcuMDQ4NkMyNC43NSAyNi42NzEgMjQuNjA1MSAyNi4zMDg5IDI0LjM0NzMgMjYuMDQyQzI0LjA4OTQgMjUuNzc1IDIzLjczOTcgMjUuNjI1IDIzLjM3NSAyNS42MjVDMjMuMDEwMyAyNS42MjUgMjIuNjYwNiAyNS43NzUgMjIuNDAyNyAyNi4wNDJDMjIuMTQ0OSAyNi4zMDg5IDIyIDI2LjY3MSAyMiAyNy4wNDg2QzIyIDI3LjQyNjIgMjIuMTQ0OSAyNy43ODgzIDIyLjQwMjcgMjguMDU1M0MyMi42NjA2IDI4LjMyMjIgMjMuMDEwMyAyOC40NzIyIDIzLjM3NSAyOC40NzIyWiIgZmlsbD0iIzIzMzEzMiIvPgo8L3N2Zz4K)" aria-hidden="true"></span></span></div></div>
+<script>
+  // Mock behavior only: clicking Add to cart shows the real toast and bumps the
+  // header count. There is no cart logic here, on purpose.
+  const count = document.querySelector('.site-header__cart-count');
+  const toast = document.querySelector('.proto-toast');
+  document.querySelectorAll('.home-product-card .button').forEach((button) => {
+    button.addEventListener('click', () => {
+      count.textContent = String(Number(count.textContent) + 1);
+      toast.classList.remove('is-visible');
+      void toast.offsetWidth; // restart the toast's enter animation
+      toast.classList.add('is-visible');
+      setTimeout(() => toast.classList.remove('is-visible'), 2500);
+    });
+  });
+</script>
+</body>
+</html>

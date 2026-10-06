@@ -1,0 +1,179 @@
+# How components relate to each other. These are the rules that never get
+# written down, because they live in a designer's judgment rather than in
+# any single component's documentation.
+
+rules:
+  - id: badge-follows-title
+    text: >-
+      A badge that qualifies a title sits immediately after it on the same line,
+      never on the line below. A badge on its own line reads as a separate
+      element rather than as a property of the thing above it.
+    scope: pair
+    strength: should
+    source: inferred
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Badge, Card]
+
+  - id: button-order-primary-right
+    text: >-
+      In a row of buttons, the primary action goes right and the cancel or back
+      action goes left. In a vertical stack the primary goes on top. Exception:
+      toolbars read left to right by frequency of use, not by priority.
+    scope: pair
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Button]
+
+  - id: card-no-nesting
+    text: >-
+      Cards do not nest inside cards. Nested cards produce competing borders and
+      ambiguous grouping. Use spacing and a heading to separate content inside a
+      single card.
+    scope: pair
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Card]
+
+  - id: icon-with-label
+    text: >-
+      An icon that triggers an action carries a text label unless the icon is
+      universally understood, such as close or search. An icon-only button is a
+      guess for the user.
+    scope: pair
+    strength: should
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Button, Icon]
+
+  - id: input-select-alignment
+    text: >-
+      Inputs and selects in the same form share one width and one left edge.
+      Mixed widths in a form read as unintentional.
+    scope: pair
+    strength: should
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Input, Select]
+
+  - id: lineitem-price-alignment
+    text: >-
+      Prices in a list of line items are right-aligned to a shared edge so they
+      can be compared down the column rather than read individually.
+    scope: pair
+    strength: should
+    source: proposed
+    status: proposed
+    components: [LineItem]
+
+  - id: summary-rows
+    text: >-
+      Summary rows put the label on the left in regular weight and the value on
+      the right in bold. The final total row is separated from the rows above it
+      by a --color-border divider.
+    scope: pair
+    strength: should
+    source: inferred
+    status: proposed
+    components: [LineItem]
+    tokens: [--color-border]
+    rationale: >-
+      Product specs (Width/18 cm), cart totals, order cards and order
+      confirmation all use label-left, bold-value-right rows, with a divider
+      before Total. Complements lineitem-price-alignment, which covers
+      right-alignment only.
+
+  - id: out-of-stock-replaces-action
+    text: >-
+      When a product is out of stock, the Add to cart button is replaced by an
+      Error badge reading "out of stock" in the same position. Never show both,
+      and never show a disabled Add to cart button instead.
+    scope: pair
+    strength: must
+    source: inferred
+    status: proposed
+    components: [ProductCard, Button, Badge]
+    rationale: >-
+      Day Pack, Desk Mat and Terra Daylight Planter on the Home page. The design
+      review note on the Home page (494:780) flags that the component's booleans
+      allow both at once.
+
+  - id: secondary-action-default
+    text: >-
+      When a secondary action sits next to the main action, it uses the Default
+      (dark) button, not a second accent, primary or ghost style.
+    scope: pair
+    strength: should
+    source: inferred
+    status: proposed
+    components: [Button]
+    rationale: >-
+      Every two-button row pairs Default with Accent: View details / Add to cart
+      (Home), Add to cart / Go to cart (Product Details), View all orders /
+      Continue shopping (Order Confirmation).
+
+  - id: form-labels-above
+    text: >-
+      Form fields have a visible label above them, in bold. Placeholder text is
+      never the label: it disappears the moment someone starts typing.
+    scope: pair
+    strength: must
+    source: inferred
+    status: proposed
+    components: [Input, Select]
+    rationale: >-
+      Checkout's Name and Email fields (Cart & Checkout 54:1091) use bold labels
+      above the field.
+
+  - id: remove-item-action
+    text: >-
+      Removing an item from a list is a trash icon at the right edge of that
+      item's row, tinted --color-error. It removes that item only; clearing a
+      whole list is a separate, labeled action.
+    scope: pair
+    strength: should
+    source: inferred
+    status: proposed
+    components: [CartItem, Icon]
+    tokens: [--color-error]
+    rationale: >-
+      Both cart items on Cart & Checkout use Icon[Trash] in error red at the
+      row's right edge. Note this is an icon-only control; see the open question
+      about icon-with-label.
+
+  - id: review-summary-first
+    text: >-
+      A list of reviews opens with a one-line summary (average rating and review
+      count) before the individual reviews.
+    scope: pair
+    strength: consider
+    source: inferred
+    status: proposed
+    components: [CustomerReviews, CustomerReview]
+    rationale: >-
+      Customer Reviews on Product Details opens with "4.7/5 average from 3
+      reviews".
+
+  - id: header-cart-count
+    text: >-
+      The cart icon in the header always shows the item count next to it,
+      including 0. The count is the only place the cart's state is visible on
+      every page.
+    scope: pair
+    strength: must
+    source: inferred
+    status: proposed
+    components: [Header, Icon]
+    rationale: >-
+      Every page's header shows the cart icon with a count.

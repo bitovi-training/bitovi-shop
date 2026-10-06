@@ -1,0 +1,29 @@
+{
+  "id": "gift-options-action",
+  "name": "Gift options",
+  "date": "2026-09-22",
+  "found_in": { "screen": "Checkout", "nodeId": "564:834" },
+
+  "what_it_is": "A pill-shaped action sitting below the promo message, opening gift wrapping and message options.",
+
+  "closest_existing": {
+    "component": "Button",
+    "comparison": {
+      "fill": "--color-primary rgb(0,70,74) vs Button/Default's rgb(35,49,50)",
+      "height": "36px vs Button's 26px",
+      "cornerRadius": "18px vs Button's fully rounded 9999px"
+    },
+    "why_it_falls_short": "It is not a detached copy of Button. The fill, height and corner radius all differ, so it was drawn independently rather than pulled from the system and modified. Functionally, though, it does exactly what a Button does: it is a labelled control that triggers an action. There is no behaviour here the Button component does not already cover."
+  },
+
+  "occurrences": 1,
+  "likely_reuse": "low",
+
+  "accessibility": "Text label present and legible. White on --color-primary passes contrast. No focus, hover or disabled state defined, which any promoted component would need.",
+
+  "recommendation": "Use the existing Button component. This looks like a new pattern because it was drawn by hand rather than composed, but nothing about what it does is new. Promoting it would add a second way to express an action, which is how a design system starts contradicting itself. If the visual difference is deliberate and wanted, that is an argument for a new Button variant rather than a new component.",
+
+  "notes_for_the_design_system_team": "Worth asking the designer why it was drawn rather than composed. If they could not find a Button variant that fit, the gap may be in the documentation rather than in the system.",
+
+  "status": "awaiting_review"
+}

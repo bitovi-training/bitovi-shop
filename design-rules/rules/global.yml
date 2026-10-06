@@ -1,0 +1,161 @@
+# Rules that apply everywhere, whatever is on the screen.
+
+rules:
+  - id: accent-never-surface
+    text: >-
+      Accent orange is never a background or surface fill. It is a signal color,
+      and at large areas it stops signalling anything. Surfaces use
+      --color-surface or --color-background.
+    scope: global
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    tokens: ["--color-accent", "--color-background", "--color-surface"]
+
+  - id: semantic-color-meaning
+    text: >-
+      Success green and error red carry meaning and are reserved for it. A
+      button is not Success because green looks good there, it is Success
+      because completing the action is a positive outcome.
+    scope: global
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Badge, Button]
+    tokens: ["--color-error", "--color-success"]
+
+  - id: page-max-width
+    text: >-
+      Page content is constrained to --page-max-width and left-aligned with the
+      logo in the header. Full-bleed backgrounds (the home hero band) can run
+      edge to edge, but the content inside them follows the same column.
+    scope: global
+    strength: should
+    source: inferred
+    status: proposed
+    tokens: [--page-max-width]
+    rationale: >-
+      Header, breadcrumbs, titles and panels share one left edge on every page;
+      the home hero band is full-bleed while its card stays in the column.
+
+  - id: type-families
+    text: >-
+      Two typefaces only: Poppins for headings and titles, Inter for everything
+      else, including prices, labels and buttons. No third typeface, including
+      for decorative or campaign text.
+    scope: global
+    strength: must
+    source: inferred
+    status: proposed
+    tokens: [--font-family-heading, --font-family-body]
+    rationale: >-
+      Every text layer on the five pages is Poppins Bold or Inter, except the
+      home hero's "Featured Product" in Brush Script MT, which this rule flags
+      as a violation for the design team to confirm.
+
+  - id: text-color-roles
+    text: >-
+      Text color carries a role. Headings and product names use --color-primary
+      or --color-primary-dark. Body text and values use --color-text. Secondary
+      information (descriptions, dates, emails, eyebrow labels, review authors)
+      uses --color-text-light. Don't pick a text color for emphasis alone; use
+      weight.
+    scope: global
+    strength: should
+    source: inferred
+    status: proposed
+    tokens: [--color-text, --color-text-light, --color-primary, --color-primary-dark]
+    rationale: >-
+      Consistent across all five pages: headings #00464a/#023538, body #233132,
+      meta #4f4f4f.
+
+  - id: eyebrow-label
+    text: >-
+      A short uppercase label above a title (an eyebrow) sets context, like
+      "PRODUCT DETAIL" or "THIS WEEK". It uses --color-text-light at body size
+      or smaller, and it is never the only place important information appears.
+    scope: global
+    strength: consider
+    source: inferred
+    status: proposed
+    tokens: [--color-text-light]
+    rationale: >-
+      Used on the product page ("PRODUCT DETAIL") and the featured product
+      ("THIS WEEK", "HANDPICKED FOR THE WEEK").
+
+  - id: price-format
+    text: >-
+      Prices always show a dollar sign and two decimals ($32.00, never $32 or
+      32.00) and are set in bold. A price is never the only bold text competing
+      in a row with another bold value.
+    scope: global
+    strength: must
+    source: inferred
+    status: proposed
+    components: [LineItem, CartItem, ProductCard, ProductDetailsCard, OrderCard]
+    rationale: >-
+      Every price on every page follows $X.XX in Inter Bold: product cards,
+      product details, cart items, line items, order totals.
+
+  - id: date-format
+    text: >-
+      Dates and times use one format across the product: "Jun 15, 2026, 3:08
+      PM". Numeric dates like 6/8/2026 are ambiguous between US and
+      international readers.
+    scope: global
+    strength: should
+    source: inferred
+    status: proposed
+    components: [OrderCard]
+    rationale: >-
+      The designs disagree: Orders shows "6/8/2026, 12:07 PM" and Order
+      Confirmation shows "Placed Jun 15, 2026, 3:08 PM".
+
+  - id: panel-padding
+    text: >-
+      Surface panels use --space-md (16px) padding on all sides. Content never
+      touches a panel's edge.
+    scope: global
+    strength: should
+    source: inferred
+    status: proposed
+    components: [Card, ProductDetailsCard, OrderCard, ProductSpecs, CustomerReviews]
+    tokens: [--space-md]
+    rationale: >-
+      16/16/16/16 is the padding on panels across Product Details, Orders and
+      Order Confirmation.
+
+  - id: spacing-from-scale
+    text: >-
+      Gaps and padding come from the space scale: 4, 8, 16, 24 or 32px (the
+      Spacing variables in Figma). A value off the scale is either a missing
+      token that should be added, or a mistake.
+    scope: global
+    strength: should
+    source: inferred
+    status: proposed
+    tokens: [--space-xs, --space-sm, --space-md, --space-xl]
+    rationale: >-
+      The designs mostly follow the scale, but 10px gaps appear 98 times across
+      the five Base App pages, and 7px and 74px also appear. None of those is a
+      Figma Spacing variable. Figma has Spacing/LG = 24px, which has no CSS
+      token (--space-lg is missing from styles.css). Needs a decision before
+      approval: add 10px to the scale, or fix the designs.
+
+  - id: corner-radius-roles
+    text: >-
+      Corner radius signals what something is: 8px for panels, cards and images,
+      --radius-full for controls and labels (buttons, badges), 4px for small
+      inline thumbnails and inputs.
+    scope: global
+    strength: consider
+    source: inferred
+    status: proposed
+    tokens: [--radius-full]
+    rationale: >-
+      Radii in the designs are 8 (panels, cards), 9999/1000 (buttons, badges)
+      and 4 (cart thumbnails, inputs). Only --radius-full is a token today.

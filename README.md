@@ -67,7 +67,7 @@ Detailed request/response schemas and error codes live in [backend/README.md](ba
 
 - Global design tokens are defined as CSS variables in `frontend/src/styles.css`.
 - The token set covers color, typography, spacing, radii, and page-width primitives used throughout the app.
-- Shared UI building blocks live in `frontend/src/components`, including `Button`, `Card`, `Badge`, `Input`, `Select`, `Rating`, and `Logo`.
+- Shared UI building blocks live in `frontend/src/components`, including `Button`, `Card`, `Badge`, `Input`, `Select`, `Rating`, `Logo`, `Icon`, `Breadcrumb`, `LineItem` and `Toast`.
 - Page and component styles are organized as plain CSS files colocated with their React components under `frontend/src/components` and `frontend/src/pages`.
 - Layout is standardized through shared wrappers like `PageTemplate`, while individual components consume the same CSS variable palette for consistent styling.
 
@@ -77,3 +77,24 @@ Detailed request/response schemas and error codes live in [backend/README.md](ba
 - Product catalog and orders persist via the backend SQLite snapshot file.
 - If an older `backend/database/todos.db` file exists, the app copies it forward into `backend/database/shop.db` on startup.
 - Checkout is intentionally simplified for demo use.
+
+## AI enablement (`ai-enablement` branch)
+
+This branch turns the shop into Bitovi's training environment and context
+store for design-to-code AI workflows: Code Connect, a design rules store,
+designing and reviewing on the Figma canvas, prototyping in code, writing
+tickets against the code, and production code from designs. Each is a skill
+in `.claude/skills/` with an FAQ beside it.
+
+Start with `docs/ai-enablement/README.md`, and see "First run" in
+`CLAUDE.md` for setup. Extra scripts on this branch:
+
+| Script | What it does |
+| --- | --- |
+| `npm test` | Vitest and React Testing Library |
+| `npm run figma:check` / `figma:publish` | Code Connect coverage check / publish mappings |
+| `npm run mocks:build` / `mocks:check` / `mocks:bundle` | Generated HTML mocks of components, for prototypes |
+| `npm run prototype:share` | Public URL for the app in a GitHub Codespace |
+| `npm run rules:build` / `rules:approve` | Design rules index / human approval of rules |
+| `npm run mcp:design-rules` | The design rules MCP server |
+

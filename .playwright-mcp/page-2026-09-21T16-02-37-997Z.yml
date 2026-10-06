@@ -1,0 +1,122 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Go to home page" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+        - generic "bitovi shop logo" [ref=e7]:
+          - generic [aria-hidden] [ref=e8]: bitovi
+          - generic [ref=e9]: shop
+      - navigation "Main navigation" [ref=e10]:
+        - link "Shop" [ref=e11] [cursor=pointer]:
+          - /url: "#/"
+        - link "Orders" [ref=e12] [cursor=pointer]:
+          - /url: "#/orders"
+        - link "Go to cart with 0 items" [ref=e13] [cursor=pointer]:
+          - /url: "#/cart"
+          - generic [ref=e16]: "0"
+  - region "Featured product hero" [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: Featured Product
+        - paragraph [ref=e21]: HANDPICKED FOR THE WEEK
+      - 'article "Featured product: Sunset Mug" [ref=e22]':
+        - link [ref=e23] [cursor=pointer]:
+          - /url: "#/products/3"
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: Featured pick
+            - generic [ref=e29]: In stock
+          - paragraph [ref=e30]: THIS WEEK
+          - heading "Sunset Mug" [level=2] [ref=e31]
+          - paragraph [ref=e32]: Ceramic mug with matte glaze and ergonomic handle.
+          - paragraph [ref=e33]: $24.00
+          - generic [ref=e34]:
+            - link [ref=e35] [cursor=pointer]:
+              - /url: "#/products/3"
+              - button "View details" [ref=e36]
+            - button "Add to cart" [ref=e37] [cursor=pointer]
+  - main [ref=e41]:
+    - region "Products" [ref=e42]:
+      - article "Aero Bottle" [ref=e43]:
+        - link [ref=e44] [cursor=pointer]:
+          - /url: "#/products/1"
+        - generic [ref=e47]:
+          - link [ref=e48] [cursor=pointer]:
+            - /url: "#/products/1"
+            - heading "Aero Bottle" [level=2] [ref=e49]
+          - paragraph [ref=e50]: Insulated everyday bottle with powder-coated finish.
+          - generic [ref=e51]: $32.00
+          - button "Add to cart" [ref=e53] [cursor=pointer]
+      - article "Trail Pack" [ref=e54]:
+        - link [ref=e55] [cursor=pointer]:
+          - /url: "#/products/2"
+        - generic [ref=e58]:
+          - link [ref=e59] [cursor=pointer]:
+            - /url: "#/products/2"
+            - heading "Trail Pack" [level=2] [ref=e60]
+          - paragraph [ref=e61]: Compact carry pack for quick city or day-trip essentials.
+          - generic [ref=e62]:
+            - generic [ref=e63]: $89.00
+            - generic [ref=e64]: out of stock
+      - article "Sunset Mug" [ref=e65]:
+        - link [ref=e66] [cursor=pointer]:
+          - /url: "#/products/3"
+        - generic [ref=e69]:
+          - link [ref=e70] [cursor=pointer]:
+            - /url: "#/products/3"
+            - heading "Sunset Mug" [level=2] [ref=e71]
+          - paragraph [ref=e72]: Ceramic mug with matte glaze and ergonomic handle.
+          - generic [ref=e73]: $24.00
+          - button "Add to cart" [ref=e75] [cursor=pointer]
+      - article "Desk Mat" [ref=e76]:
+        - link [ref=e77] [cursor=pointer]:
+          - /url: "#/products/4"
+        - generic [ref=e80]:
+          - link [ref=e81] [cursor=pointer]:
+            - /url: "#/products/4"
+            - heading "Desk Mat" [level=2] [ref=e82]
+          - paragraph [ref=e83]: Non-slip desk mat designed for focused work sessions.
+          - generic [ref=e84]: $45.00
+          - button "Add to cart" [ref=e86] [cursor=pointer]
+      - article "Flow Tee" [ref=e87]:
+        - link [ref=e88] [cursor=pointer]:
+          - /url: "#/products/5"
+        - generic [ref=e91]:
+          - link [ref=e92] [cursor=pointer]:
+            - /url: "#/products/5"
+            - heading "Flow Tee" [level=2] [ref=e93]
+          - paragraph [ref=e94]: Soft heavyweight cotton tee with relaxed fit.
+          - generic [ref=e95]:
+            - generic [ref=e96]: $38.00
+            - generic [ref=e97]: out of stock
+      - article "Daily Notebook" [ref=e98]:
+        - link [ref=e99] [cursor=pointer]:
+          - /url: "#/products/6"
+        - generic [ref=e102]:
+          - link [ref=e103] [cursor=pointer]:
+            - /url: "#/products/6"
+            - heading "Daily Notebook" [level=2] [ref=e104]
+          - paragraph [ref=e105]: Thread-bound notebook with dot grid recycled paper.
+          - generic [ref=e106]: $18.00
+          - button "Add to cart" [ref=e108] [cursor=pointer]
+      - article "Mono Lamp" [ref=e109]:
+        - link [ref=e110] [cursor=pointer]:
+          - /url: "#/products/7"
+        - generic [ref=e113]:
+          - link [ref=e114] [cursor=pointer]:
+            - /url: "#/products/7"
+            - heading "Mono Lamp" [level=2] [ref=e115]
+          - paragraph [ref=e116]: Minimal desk lamp with warm dimmable light.
+          - generic [ref=e117]: $79.00
+          - button "Add to cart" [ref=e119] [cursor=pointer]
+      - article "Terra Planter" [ref=e120]:
+        - link [ref=e121] [cursor=pointer]:
+          - /url: "#/products/8"
+        - generic [ref=e124]:
+          - link [ref=e125] [cursor=pointer]:
+            - /url: "#/products/8"
+            - heading "Terra Planter" [level=2] [ref=e126]
+          - paragraph [ref=e127]: Stackable stoneware planter for indoor greens.
+          - generic [ref=e128]:
+            - generic [ref=e129]: $29.00
+            - generic [ref=e130]: out of stock

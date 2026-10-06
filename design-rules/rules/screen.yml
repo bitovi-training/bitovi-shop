@@ -1,0 +1,153 @@
+# Properties of a screen as a whole, rather than of any one element on it.
+
+rules:
+  - id: accent-single-action
+    text: >-
+      Accent orange marks the single most important action on a screen. If two
+      elements both use accent, neither reads as primary. Use it once per
+      screen, on the action you most want taken.
+    scope: screen
+    strength: must
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Badge, Button]
+    tokens: ["--color-accent"]
+
+  - id: breadcrumb-depth
+    text: >-
+      Breadcrumbs appear on pages two or more levels deep. On a top-level page
+      they add a row of chrome and tell the user nothing they do not already
+      know.
+    scope: screen
+    strength: consider
+    source: inferred
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Breadcrumb]
+
+  - id: cta-limit-per-screen
+    text: >-
+      No more than three calls to action on a screen, counting primary and
+      accent elements together. Past three, the user is choosing rather than
+      acting.
+    scope: screen
+    strength: should
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    components: [Badge, Button]
+    tokens: ["--color-accent"]
+
+  - id: heading-hierarchy-skip
+    text: >-
+      Heading levels do not skip. An h2 follows an h1, an h3 follows an h2.
+      Sizes are set by the type scale, not chosen per screen for visual weight.
+    scope: screen
+    strength: should
+    source: session
+    status: approved
+    approved_by: Levi
+    approved_on: 2026-09-22
+    tokens: ["--font-size-h1", "--font-size-h2", "--font-size-h3", "--font-size-h4"]
+
+  - id: toast-single-visible
+    text: >-
+      Only one toast is visible at a time. Stacked toasts cover the interface
+      they are reporting on, and a user who missed the first one will miss the
+      third.
+    scope: screen
+    strength: should
+    source: proposed
+    status: proposed
+    components: [Toast]
+
+  - id: header-on-every-page
+    text: >-
+      Every page starts with the Header component: the light logo on the left,
+      then Shop, Orders and the cart icon with its item count on the right.
+      Pages never build their own top bar or drop the header for a cleaner look.
+    scope: screen
+    strength: must
+    source: inferred
+    status: proposed
+    components: [Header, Logo]
+    rationale: >-
+      Present and identical on all five Base App pages (Home 36:1239, Product
+      Details 36:1861, Cart & Checkout 54:1091, Orders 45:1026, Order
+      Confirmation 66:869).
+
+  - id: content-on-surface-panels
+    text: >-
+      Pages sit on --color-background, and content is grouped onto
+      --color-surface panels with an 8px corner radius. Text and controls do not
+      float directly on the page background, except page titles, breadcrumbs and
+      short summary lines between panels.
+    scope: screen
+    strength: should
+    source: inferred
+    status: proposed
+    tokens: [--color-background, --color-surface]
+    rationale: >-
+      All five pages use #f1f6f6 page fill with white rounded panels: product
+      cards, the product details panel, cart items, order cards, the order
+      confirmation card.
+
+  - id: one-h1-per-page
+    text: >-
+      Each page has exactly one H1, and it names the page: "Your Cart",
+      "Orders", "Order Confirmed". On a product page the product name is the H1.
+      Section titles inside the page are H2.
+    scope: screen
+    strength: must
+    source: inferred
+    status: proposed
+    tokens: [--font-size-h1]
+    rationale: >-
+      Cart, Orders and Order Confirmation each use a single Heading 1; the
+      product page uses the product name at H1 size (32px Poppins). Checkout,
+      Specs & Delivery and Customer Reviews are H2.
+
+  - id: form-column-width
+    text: >-
+      Forms sit in a single column about half the page width, not stretched
+      across the full content width. Long fields are hard to scan and make short
+      answers look wrong.
+    scope: screen
+    strength: consider
+    source: inferred
+    status: proposed
+    components: [Input, Select]
+    rationale: >-
+      The checkout form and its summary occupy the left half of the content
+      column on Cart & Checkout.
+
+  - id: collections-have-empty-states
+    text: >-
+      Any screen that shows a list (products, cart items, orders) is designed
+      with its empty, loading and error states, not just the full state.
+    scope: screen
+    strength: should
+    source: inferred
+    status: proposed
+    components: [ProductCard, CartItem, OrderCard]
+    rationale: >-
+      No empty, loading or error states exist in the Base App designs. Flagged
+      in the Home page design review note (494:783).
+
+  - id: design-every-breakpoint
+    text: >-
+      Screens are designed at desktop and mobile widths at minimum. The product
+      grid steps down from four columns to two to one rather than shrinking
+      cards.
+    scope: screen
+    strength: consider
+    source: inferred
+    status: proposed
+    components: [ProductCard, Header]
+    rationale: >-
+      Only desktop designs exist today. Flagged in the Home page design review
+      note (494:784); the column steps are a proposal.

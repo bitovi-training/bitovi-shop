@@ -1,0 +1,32 @@
+{
+  "node": "564:819",
+  "screen": "Checkout (fix pass)",
+  "date": "2026-09-22",
+  "passes": [
+    {
+      "pass": 1,
+      "action": "fix",
+      "fixed": [
+        { "rule": "semantic-color-meaning", "node": "Badge", "change": "Error variant changed to Default; a neutral item count carries no failure meaning" },
+        { "rule": "badge-follows-title", "node": "Heading", "change": "Badge moved onto the title line, immediately after the heading" },
+        { "rule": "card-no-nesting", "node": "Items", "change": "Inner card unwrapped; its line items now sit directly in the Order card" },
+        { "rule": "button-one-primary", "node": "Actions", "change": "Three Primary buttons reduced to one" },
+        { "rule": "button-error-variant-scope", "node": "Actions", "change": "Back to cart changed from Error to Default; it navigates, it does not destroy" },
+        { "rule": "button-order-primary-right", "node": "Actions", "change": "Pay now moved right, Back to cart left" },
+        { "rule": "LAYOUT", "node": "Actions", "change": "Row reduced from 537px of children in 480px to two buttons well inside it" },
+        { "rule": "accent-never-surface", "node": "Promo", "change": "Accent moved off the surface onto the text; surface is --color-surface with a border" }
+      ],
+      "deferred": [
+        { "node": "Gift options", "reason": "Not in the design system. Substituting a component would be a guess about intent; this is a candidate for the design system team." }
+      ]
+    },
+    {
+      "pass": 2,
+      "action": "review",
+      "result": "No MUST violations and no layout failures remain. cta-limit-per-screen cleared as a consequence of reducing the action row, and the annotation went with it because review rewrites annotations from scratch rather than amending them.",
+      "remaining": [
+        { "node": "Gift options", "type": "new-pattern", "needs": "a decision from the design system team" }
+      ]
+    }
+  ]
+}

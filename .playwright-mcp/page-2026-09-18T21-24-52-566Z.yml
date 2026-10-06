@@ -1,0 +1,19 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Go to home page" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+        - generic "bitovi shop logo" [ref=e7]:
+          - generic [aria-hidden] [ref=e8]: bitovi
+          - generic [ref=e9]: shop
+      - navigation "Main navigation" [ref=e10]:
+        - link "Shop" [ref=e11] [cursor=pointer]:
+          - /url: "#/"
+        - link "Orders" [ref=e12] [cursor=pointer]:
+          - /url: "#/orders"
+        - link "Go to cart with 0 items" [ref=e13] [cursor=pointer]:
+          - /url: "#/cart"
+          - generic [ref=e16]: "0"
+  - main [ref=e17]:
+    - region "Products" [ref=e18]:
+      - paragraph [ref=e19]: Loading products...
